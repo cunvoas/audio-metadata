@@ -25,7 +25,6 @@ public class TestReportCsv {
 		}
 	}
 	
-
 	@Test
 	public void testProduceImage() {
 		ImageFileFinder finder = new ImageFileFinder();

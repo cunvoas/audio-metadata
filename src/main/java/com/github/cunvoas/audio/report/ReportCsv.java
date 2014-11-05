@@ -76,7 +76,7 @@ public class ReportCsv {
 				if (metadata!=null) {
 					colsList.addAll(metadata.toCsv());
 				} else {
-					colsList.addAll(this.emptyMetaData());
+					colsList.addAll(this.emptyMetaData(10));
 				}
 				this.formatLine(csvPrinter, colsList);
 				colsList.clear();
@@ -100,9 +100,9 @@ public class ReportCsv {
 		csvPrinter.println();
 	}
 
-	private List<String> emptyMetaData() {
+	private List<String> emptyMetaData(int qte) {
 		List<String> emptyList = new ArrayList<String>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < qte; i++) {
 			emptyList.add("");
 		}
 		return emptyList;
