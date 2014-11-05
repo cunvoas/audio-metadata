@@ -33,7 +33,7 @@ public class Main {
 			sBuilder.append(tag.getFirst(FieldKey.ARTIST));
 			sBuilder.append("-");
 			sBuilder.append(tag.getFirst(FieldKey.ALBUM));
-			sBuilder.append(".");
+			sBuilder.append(".jpg");
 			
 			for (Artwork artwork : tag.getArtworkList()) {
 				BufferedImage img = artwork.getImage();
