@@ -24,7 +24,7 @@ public class ImageFileFinder extends DirectoryWalker<File> {
 	 * @return
 	 * @throws IOException
 	 */
-	public List<File> getMusicFiles(File directory) throws IOException {
+	public List<File> getImageFiles(File directory) throws IOException {
 		List<File> files = new ArrayList<File>();
 		this.walk(directory, files);
 		return files;

@@ -1,11 +1,14 @@
 package com.github.cunvoas.audio.report;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
@@ -20,6 +23,38 @@ public class ReportCsv {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ReportCsv.class);
 
+	public void produceImage(List<File> files, File filename) {
+		CSVFormat format = CSVFormat.DEFAULT.withHeader("Image file;Width;Height").withDelimiter(';');
+		CSVPrinter csvPrinter = null;
+		PrintStream csvFilePrint = null;
+		try {
+			csvFilePrint = new PrintStream(filename);
+			csvPrinter = new CSVPrinter(csvFilePrint, format);
+			
+			for (File file : files) {
+				csvPrinter.print(file.getAbsolutePath());
+				
+				BufferedImage image = ImageIO.read(file);
+				if (image!=null) {
+					csvPrinter.print(image.getWidth());
+					csvPrinter.print(image.getHeight());
+				} else {
+					csvPrinter.print("");
+					csvPrinter.print("");
+				}
+				csvPrinter.println();
+			}
+
+		} catch (FileNotFoundException e) {
+			LOGGER.error("", e);
+		} catch (IOException e) {
+			LOGGER.error("", e);
+		} finally {
+			IOUtils.closeQuietly(csvFilePrint);
+			IOUtils.closeQuietly(csvPrinter);
+		}
+	}
+	
 	public void produceMusic(List<File> files, File filename) {
 
 		CSVFormat format = CSVFormat.DEFAULT.withHeader(
