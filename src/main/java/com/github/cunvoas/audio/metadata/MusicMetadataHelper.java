@@ -17,20 +17,24 @@ public class MusicMetadataHelper {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MusicMetadataHelper.class);
 
 	private void merge(MusicMetadata currentMetadata, MusicMetadata newMetadata) {
+		
 		if (StringUtils.isNotBlank(newMetadata.getYear())) {
 			currentMetadata.setYear(newMetadata.getYear());
 		}
-		
-		if (StringUtils.isNotBlank(newMetadata.getArtist())) {
-			currentMetadata.setArtist(newMetadata.getArtist());
+		if (StringUtils.isNotBlank(newMetadata.getAlbumArtist())) {
+			currentMetadata.setAlbumArtist(newMetadata.getAlbumArtist());
 		}
-		
+				
 		if (StringUtils.isNotBlank(newMetadata.getAlbum())) {
 			currentMetadata.setAlbum(newMetadata.getAlbum());
 		}
 		
 		if (StringUtils.isNotBlank(newMetadata.getTitle())) {
 			currentMetadata.setTitle(newMetadata.getTitle());
+		}
+		
+		if (StringUtils.isNotBlank(newMetadata.getArtist())) {
+			currentMetadata.setArtist(newMetadata.getArtist());
 		}
 		
 		if (StringUtils.isNotBlank(newMetadata.getTrack())) {
@@ -56,16 +60,18 @@ public class MusicMetadataHelper {
 				Tag tag = f.getTag();
 				
 				tag.setField(FieldKey.YEAR, currentMetadata.getYear());
-				tag.setField(FieldKey.ARTIST, currentMetadata.getArtist());
+				tag.setField(FieldKey.ALBUM_ARTIST, currentMetadata.getAlbumArtist());
 				tag.setField(FieldKey.ALBUM, currentMetadata.getAlbum());
+				
 				tag.setField(FieldKey.TITLE, currentMetadata.getTitle());
+				tag.setField(FieldKey.ARTIST, currentMetadata.getArtist());
 				tag.setField(FieldKey.TRACK, currentMetadata.getTrack());
 				tag.setField(FieldKey.TRACK_TOTAL, currentMetadata.getTotalTracks());
 				
 				// FIX Artwork PictureType=3
-				if (md.getImgLocation()!=null) {
+				if (md.getImageFile()!=null) {
 					Artwork artwork = tag.getArtworkList().get(0);
-					artwork.setFromFile(new File(md.getImgLocation()));
+					artwork.setFromFile(new File(md.getImageFile()));
 				}
 				
 				f.commit();
@@ -79,13 +85,16 @@ public class MusicMetadataHelper {
 		MusicMetadata md = null;
 		if (music.isFile()) {
 			md = new MusicMetadata();
+			md.setMusicFile(music.getAbsolutePath());
 			try {
 				AudioFile f = AudioFileIO.read(music);
 				Tag tag = f.getTag();
 				
 				md.setYear(tag.getFirst(FieldKey.YEAR));
-				md.setArtist(tag.getFirst(FieldKey.ARTIST));
 				md.setAlbum(tag.getFirst(FieldKey.ALBUM));
+				md.setAlbumArtist(tag.getFirst(FieldKey.ALBUM_ARTIST));
+				
+				md.setArtist(tag.getFirst(FieldKey.ARTIST));
 				md.setTitle(tag.getFirst(FieldKey.TITLE));
 				md.setTrack(tag.getFirst(FieldKey.TRACK));
 				md.setTotalTracks(tag.getFirst(FieldKey.TRACK_TOTAL));

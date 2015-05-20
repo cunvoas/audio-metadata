@@ -8,9 +8,11 @@ import java.util.List;
  * @author CUNVOAS
  */
 public class MusicMetadata {
+	private String musicFile;
 	private String year;
-	private String artist;
 	private String album;
+	private String albumArtist;
+	private String artist;
 	private String title;
 	private String track;
 	private String totalTracks;
@@ -18,7 +20,7 @@ public class MusicMetadata {
 	private boolean image;
 	private int imgWidth;
 	private int imgHeight;
-	private String imgLocation;
+	private String imageFile;
 
 	/**
 	 * Getter for year.
@@ -191,43 +193,77 @@ public class MusicMetadata {
 		this.imgHeight = imgHeight;
 	}
 
-	/**
-	 * Getter for imgLocation.
-	 * 
-	 * @return the imgLocation
-	 */
-	public String getImgLocation() {
-		return imgLocation;
-	}
-
-	/**
-	 * Setter for imgLocation.
-	 * 
-	 * @param imgLocation
-	 *            the imgLocation to set
-	 */
-	public void setImgLocation(String imgLocation) {
-		this.imgLocation = imgLocation;
-	}
 
 	public static String headerCsv() {
-		return "Artist;Year;Album;Title;Track;Total;withImg;witdh;height;imgLocation";
+		return "Music file;Year;Album;Album artist;Track;Total;Title;Artist;withImg;witdh;height;Image file";
 	}
 
 	public List<String> toCsv() {
-		List<String> colList = new ArrayList<String>(10);
+		List<String> colList = new ArrayList<String>(12);
 		
-		colList.add(getArtist());
+		colList.add(getMusicFile());
 		colList.add(getYear());
 		colList.add(getAlbum());
-		colList.add(getTitle());
+		colList.add(getAlbumArtist());
+
 		colList.add(getTrack());
 		colList.add(getTotalTracks());
+		colList.add(getTitle());
+		colList.add(getArtist());
+		
 		colList.add(String.valueOf(isImage()));
 		colList.add(String.valueOf(getImgWidth()));
 		colList.add(String.valueOf(getImgHeight()));
-		colList.add(String.valueOf(getImgLocation()));
+		colList.add(String.valueOf(getImageFile()));
 		
 		return colList;
+	}
+
+	/**
+	 * Getter for musicFile.
+	 * @return the musicFile
+	 */
+	public String getMusicFile() {
+		return musicFile;
+	}
+
+	/**
+	 * Setter for musicFile.
+	 * @param musicFile the musicFile to set
+	 */
+	public void setMusicFile(String musicFile) {
+		this.musicFile = musicFile;
+	}
+
+	/**
+	 * Getter for albumArtist.
+	 * @return the albumArtist
+	 */
+	public String getAlbumArtist() {
+		return albumArtist;
+	}
+
+	/**
+	 * Setter for albumArtist.
+	 * @param albumArtist the albumArtist to set
+	 */
+	public void setAlbumArtist(String albumArtist) {
+		this.albumArtist = albumArtist;
+	}
+
+	/**
+	 * Getter for imageFile.
+	 * @return the imageFile
+	 */
+	public String getImageFile() {
+		return imageFile;
+	}
+
+	/**
+	 * Setter for imageFile.
+	 * @param imageFile the imageFile to set
+	 */
+	public void setImageFile(String imageFile) {
+		this.imageFile = imageFile;
 	}
 }
