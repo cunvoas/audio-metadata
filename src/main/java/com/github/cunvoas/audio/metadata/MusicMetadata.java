@@ -8,6 +8,9 @@ import java.util.List;
  * @author CUNVOAS
  */
 public class MusicMetadata {
+
+	public static final int NB_TAGS=12;
+	
 	private String musicFile;
 	private String year;
 	private String album;
@@ -199,7 +202,7 @@ public class MusicMetadata {
 	}
 
 	public List<String> toCsv() {
-		List<String> colList = new ArrayList<String>(12);
+		List<String> colList = new ArrayList<String>(NB_TAGS);
 		
 		colList.add(getMusicFile());
 		colList.add(getYear());

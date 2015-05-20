@@ -76,7 +76,7 @@ public class ReportCsv {
 				if (metadata!=null) {
 					colsList.addAll(metadata.toCsv());
 				} else {
-					colsList.addAll(this.emptyMetaData(10));
+					colsList.addAll(this.emptyMetaData(MusicMetadata.NB_TAGS));
 				}
 				this.formatLine(csvPrinter, colsList);
 				colsList.clear();

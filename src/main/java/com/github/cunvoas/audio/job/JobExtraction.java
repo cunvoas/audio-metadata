@@ -1,9 +1,13 @@
 package com.github.cunvoas.audio.job;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.github.cunvoas.audio.report.CsvMetadata;
 
 /**
  * Jod for metadata extraction.
@@ -16,8 +20,9 @@ public class JobExtraction extends Job {
 	 * Constructor.
 	 * @param metaDataFile
 	 */
-	public JobExtraction(File metaDataFile) {
+	public JobExtraction(File metaDataFile) throws IOException, FileNotFoundException {
 		super(metaDataFile);
+		
 	}
 
 	/**
@@ -32,9 +37,19 @@ public class JobExtraction extends Job {
 	 * @see com.github.cunvoas.audio.job.Job#process(java.io.File)
 	 */
 	@Override
-	public void process(File musicFile) {
+	public void process(File musicFile) throws IOException{
 		LOGGER.info(musicFile.getAbsolutePath());
-
+		csvMetadata.append(musicFile);
 	}
+
+	/**
+	 * @see com.github.cunvoas.audio.job.Job#getLogger()
+	 */
+	@Override
+	public Logger getLogger() {
+		return LOGGER;
+	}
+	
+	
 
 }
