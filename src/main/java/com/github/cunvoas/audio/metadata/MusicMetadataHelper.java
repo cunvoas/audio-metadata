@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 public class MusicMetadataHelper {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MusicMetadataHelper.class);
 
-	private void merge(MusicMetadata currentMetadata, MusicMetadata newMetadata) {
+	private static void merge(MusicMetadata currentMetadata, MusicMetadata newMetadata) {
 		
 		if (StringUtils.isNotBlank(newMetadata.getYear())) {
 			currentMetadata.setYear(newMetadata.getYear());
@@ -51,13 +51,14 @@ public class MusicMetadataHelper {
 	 * @param music
 	 * @param md
 	 */
-	public void update (File music, MusicMetadata md) {
+	public static void update (File music, MusicMetadata md) {
 		if (music.isFile()) {
 			MusicMetadata currentMetadata = extract(music);
 			merge(currentMetadata, md);
 			try {
+				
 				AudioFile f = AudioFileIO.read(music);
-				Tag tag = f.getTag();
+				Tag tag = f.getTagOrCreateDefault();
 				
 				tag.setField(FieldKey.YEAR, currentMetadata.getYear());
 				tag.setField(FieldKey.ALBUM_ARTIST, currentMetadata.getAlbumArtist());
@@ -65,14 +66,15 @@ public class MusicMetadataHelper {
 				
 				tag.setField(FieldKey.TITLE, currentMetadata.getTitle());
 				tag.setField(FieldKey.ARTIST, currentMetadata.getArtist());
+				
 				tag.setField(FieldKey.TRACK, currentMetadata.getTrack());
 				tag.setField(FieldKey.TRACK_TOTAL, currentMetadata.getTotalTracks());
 				
 				// FIX Artwork PictureType=3
-				if (md.getImageFile()!=null) {
-					Artwork artwork = tag.getArtworkList().get(0);
-					artwork.setFromFile(new File(md.getImageFile()));
-				}
+//				if (md.getImageFile()!=null) {
+//					Artwork artwork = tag.getArtworkList().get(0);
+//					artwork.setFromFile(new File(md.getImageFile()));
+//				}
 				
 				f.commit();
 			} catch (Exception e) {
@@ -81,7 +83,7 @@ public class MusicMetadataHelper {
 		}
 	}
 	
-	public MusicMetadata extract(File music) {
+	public static MusicMetadata extract(File music) {
 		MusicMetadata md = null;
 		if (music.isFile()) {
 			md = new MusicMetadata();

@@ -5,25 +5,27 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import com.github.cunvoas.audio.job.Job;
-import com.github.cunvoas.audio.job.JobExtraction;
-import com.github.cunvoas.audio.job.JobMode;
+import com.github.cunvoas.audio.job.JobUpdate;
 import com.github.cunvoas.audio.walker.MusicDirectoryWalker;
 
 public class MainAudioMetadata {
 
 	public static void main(String[] args) {
+		String metaData = "I:/Music/split/meta.csv";
+		String musicFolder = "I:/Music/split/";
 		
-		String metaData = "c:/Music/meta.csv";
+		
+		
 		Job jobProcess = null;
 		try {
-			jobProcess = new JobExtraction(new File(metaData));
+			MusicDirectoryWalker walker = new MusicDirectoryWalker();
+//			jobProcess = new JobExtraction(new File(metaData));
+			jobProcess = new JobUpdate(new File(metaData));
 			
-			MusicDirectoryWalker walker = new MusicDirectoryWalker(JobMode.EXTRACT_METADATA);
+
 			walker.setJobProcess(jobProcess);
+			walker.perform(new File(musicFolder));
 			
-			//walker.setPerformActive(false);
-			walker.perform(new File("C:/Music/"));
- 
 			
 		} catch (FileNotFoundException e) {
 			System.err.println(e);;
