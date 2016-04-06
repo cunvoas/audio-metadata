@@ -17,32 +17,36 @@ public class MusicMetadataHelper {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MusicMetadataHelper.class);
 
 	private static void merge(MusicMetadata currentMetadata, MusicMetadata newMetadata) {
+		if (currentMetadata==null) {
+			currentMetadata = newMetadata;
+		} else {
 		
-		if (StringUtils.isNotBlank(newMetadata.getYear())) {
-			currentMetadata.setYear(newMetadata.getYear());
-		}
-		if (StringUtils.isNotBlank(newMetadata.getAlbumArtist())) {
-			currentMetadata.setAlbumArtist(newMetadata.getAlbumArtist());
-		}
-				
-		if (StringUtils.isNotBlank(newMetadata.getAlbum())) {
-			currentMetadata.setAlbum(newMetadata.getAlbum());
-		}
-		
-		if (StringUtils.isNotBlank(newMetadata.getTitle())) {
-			currentMetadata.setTitle(newMetadata.getTitle());
-		}
-		
-		if (StringUtils.isNotBlank(newMetadata.getArtist())) {
-			currentMetadata.setArtist(newMetadata.getArtist());
-		}
-		
-		if (StringUtils.isNotBlank(newMetadata.getTrack())) {
-			currentMetadata.setTrack(newMetadata.getTrack());
-		}
-		
-		if (StringUtils.isNotBlank(newMetadata.getTotalTracks())) {
-			currentMetadata.setTotalTracks(newMetadata.getTotalTracks());
+			if (StringUtils.isNotBlank(newMetadata.getYear())) {
+				currentMetadata.setYear(newMetadata.getYear());
+			}
+			if (StringUtils.isNotBlank(newMetadata.getAlbumArtist())) {
+				currentMetadata.setAlbumArtist(newMetadata.getAlbumArtist());
+			}
+					
+			if (StringUtils.isNotBlank(newMetadata.getAlbum())) {
+				currentMetadata.setAlbum(newMetadata.getAlbum());
+			}
+			
+			if (StringUtils.isNotBlank(newMetadata.getTitle())) {
+				currentMetadata.setTitle(newMetadata.getTitle());
+			}
+			
+			if (StringUtils.isNotBlank(newMetadata.getArtist())) {
+				currentMetadata.setArtist(newMetadata.getArtist());
+			}
+			
+			if (StringUtils.isNotBlank(newMetadata.getTrack())) {
+				currentMetadata.setTrack(newMetadata.getTrack());
+			}
+			
+			if (StringUtils.isNotBlank(newMetadata.getTotalTracks())) {
+				currentMetadata.setTotalTracks(newMetadata.getTotalTracks());
+			}
 		}
 		
 	}
