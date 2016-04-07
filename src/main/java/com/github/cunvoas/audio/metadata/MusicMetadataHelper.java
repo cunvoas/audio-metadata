@@ -75,10 +75,11 @@ public class MusicMetadataHelper {
 				tag.setField(FieldKey.TRACK_TOTAL, currentMetadata.getTotalTracks());
 				
 				// FIX Artwork PictureType=3
-//				if (md.getImageFile()!=null) {
-//					Artwork artwork = tag.getArtworkList().get(0);
-//					artwork.setFromFile(new File(md.getImageFile()));
-//				}
+				if (md.getImageFile()!=null && !"null".equals(md.getImageFile())) {
+					Artwork artwork = tag.getArtworkList().get(0);
+					artwork.setFromFile(new File(md.getImageFile()));
+					artwork.setPictureType(PictureTypes.DEFAULT_ID);
+				}
 				
 				f.commit();
 			} catch (Exception e) {

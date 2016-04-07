@@ -12,8 +12,8 @@ import com.github.cunvoas.audio.walker.MusicDirectoryWalker;
 public class MainAudioMetadata {
 
 	public static void main(String[] args) {
-		String metaData = "I:/Music/edc/meta2.csv";
-		String musicFolder = "I:/Music/edc/";
+		String metaData = "I:/Music/Eths/meta_eths.csv";
+		String musicFolder = "I:/Music/Eths/";
 		
 		
 		
@@ -21,7 +21,7 @@ public class MainAudioMetadata {
 		try {
 			MusicDirectoryWalker walker = new MusicDirectoryWalker();
 //			jobProcess = new JobExtraction(new File(metaData));
-			jobProcess = new JobUpdate(new File(metaData));
+						jobProcess = new JobUpdate(new File(metaData));
 			
 
 			walker.setJobProcess(jobProcess);
