@@ -15,20 +15,24 @@ import com.github.cunvoas.audio.report.CsvMetadata;
 
 /**
  * Jod for metadata extraction.
+ * 
  * @author CUNVOAS
  */
 public class JobUpdate extends Job {
-	private static final Logger LOGGER = LoggerFactory.getLogger(JobUpdate.class);
-	
-	private Map<String, MusicMetadata> meta = null; ;
-	
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(JobUpdate.class);
+
+	private Map<String, MusicMetadata> meta = null;;
+
 	/**
 	 * Constructor.
+	 * 
 	 * @param metaDataFile
 	 */
-	public JobUpdate(File metaDataFile) throws IOException, FileNotFoundException {
+	public JobUpdate(File metaDataFile) throws IOException,
+			FileNotFoundException {
 		super(metaDataFile);
-		CsvMetadata csvMetadata =null;
+		CsvMetadata csvMetadata = null;
 		try {
 			csvMetadata = new CsvMetadata(metaDataFile, getMode());
 			meta = csvMetadata.parse();
@@ -51,14 +55,14 @@ public class JobUpdate extends Job {
 	 * @see com.github.cunvoas.audio.job.Job#process(java.io.File)
 	 */
 	@Override
-	public void process(File musicFile) throws IOException{
-		
+	public void process(File musicFile) throws IOException {
+
 		MusicMetadata md = meta.get(musicFile.getAbsolutePath());
-		if (md!=null) {
+		if (md != null) {
 			MusicMetadataHelper.update(musicFile, md);
 			LOGGER.info("Processed {}", musicFile.getAbsolutePath());
 		}
-		
+
 	}
 
 	/**
@@ -68,7 +72,5 @@ public class JobUpdate extends Job {
 	public Logger getLogger() {
 		return LOGGER;
 	}
-	
-	
 
 }

@@ -5,12 +5,13 @@ import java.util.List;
 
 /**
  * Metadata processed.
+ * 
  * @author CUNVOAS
  */
 public class MusicMetadata {
 
-	public static final int NB_TAGS=12;
-	
+	public static final int NB_TAGS = 12;
+
 	private String musicFile;
 	private String year;
 	private String album;
@@ -196,14 +197,13 @@ public class MusicMetadata {
 		this.imgHeight = imgHeight;
 	}
 
-
 	public static String headerCsv() {
 		return "Music file;Year;Album;Album artist;Track;Total;Title;Artist;withImg;witdh;height;Image file";
 	}
 
 	public List<String> toCsv() {
 		List<String> colList = new ArrayList<String>(NB_TAGS);
-		
+
 		colList.add(getMusicFile());
 		colList.add(getYear());
 		colList.add(getAlbum());
@@ -213,17 +213,18 @@ public class MusicMetadata {
 		colList.add(getTotalTracks());
 		colList.add(getTitle());
 		colList.add(getArtist());
-		
+
 		colList.add(String.valueOf(isImage()));
 		colList.add(String.valueOf(getImgWidth()));
 		colList.add(String.valueOf(getImgHeight()));
 		colList.add(String.valueOf(getImageFile()));
-		
+
 		return colList;
 	}
 
 	/**
 	 * Getter for musicFile.
+	 * 
 	 * @return the musicFile
 	 */
 	public String getMusicFile() {
@@ -232,7 +233,9 @@ public class MusicMetadata {
 
 	/**
 	 * Setter for musicFile.
-	 * @param musicFile the musicFile to set
+	 * 
+	 * @param musicFile
+	 *            the musicFile to set
 	 */
 	public void setMusicFile(String musicFile) {
 		this.musicFile = musicFile;
@@ -240,6 +243,7 @@ public class MusicMetadata {
 
 	/**
 	 * Getter for albumArtist.
+	 * 
 	 * @return the albumArtist
 	 */
 	public String getAlbumArtist() {
@@ -248,7 +252,9 @@ public class MusicMetadata {
 
 	/**
 	 * Setter for albumArtist.
-	 * @param albumArtist the albumArtist to set
+	 * 
+	 * @param albumArtist
+	 *            the albumArtist to set
 	 */
 	public void setAlbumArtist(String albumArtist) {
 		this.albumArtist = albumArtist;
@@ -256,6 +262,7 @@ public class MusicMetadata {
 
 	/**
 	 * Getter for imageFile.
+	 * 
 	 * @return the imageFile
 	 */
 	public String getImageFile() {
@@ -264,7 +271,9 @@ public class MusicMetadata {
 
 	/**
 	 * Setter for imageFile.
-	 * @param imageFile the imageFile to set
+	 * 
+	 * @param imageFile
+	 *            the imageFile to set
 	 */
 	public void setImageFile(String imageFile) {
 		this.imageFile = imageFile;

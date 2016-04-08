@@ -16,7 +16,6 @@ public class MainAudioMetadata {
 		String musicFolder = "I:/Music/Eths/";
 		
 		
-		
 		Job jobProcess = null;
 		try {
 			MusicDirectoryWalker walker = new MusicDirectoryWalker();
