@@ -62,6 +62,42 @@ public class MusicMetadataHelper {
 	}
 
 	/**
+	 * Aff front cover ton music file.
+	 * @param music
+	 * @param frontCover
+	 */
+	public static void addFrontCover(File music, File frontCover) {
+		if (music.isFile()) {
+			MusicMetadata currentMetadata = extract(music);
+				
+			
+			AudioFile f = null;
+			try {
+				Artwork artwork = new Artwork();
+				artwork.setPictureType(PictureTypes.DEFAULT_ID);
+				artwork.setFromFile(frontCover);
+				
+				f = AudioFileIO.read(music);
+				Tag tag = f.getTagOrCreateDefault();
+				if (currentMetadata.isImage() ) {
+					tag.deleteArtworkField();
+				}
+				tag.addField(artwork);
+				
+			} catch (Exception e) {
+				LOGGER.error("Metadata update {}", music.getAbsoluteFile());
+			} finally {
+				try {
+					f.commit();
+				} catch (CannotWriteException e) {
+					LOGGER.error("commit", e.getMessage());
+				}
+			}
+			
+		}
+	}
+	
+	/**
 	 * @param music
 	 * @param md
 	 */

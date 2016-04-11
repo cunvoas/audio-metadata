@@ -59,9 +59,12 @@ public class CsvMetadata implements Closeable {
 			csvFilePrint = new PrintStream(metaDataFile);
 			csvPrinter = new CSVPrinter(csvFilePrint, format);
 
-		} else {
+		} else if (JobMode.WRITE_METADATA.equals(mode)) {
 			csvReader = new FileReader(metaDataFile);
 			csvParser = new CSVParser(csvReader, format);
+		} else if (JobMode.WRITE_COVER.equals(mode)) {
+			
+
 		}
 	}
 
