@@ -13,7 +13,7 @@ public class MainAddFrontCover {
 
 	public static void main(String[] args) {
 		String coverFile = "D:/Music/FLAC/Idensity/2013- Chronicles/Chronicles.jpg";
-		String musicFolder = "D:/Music/FLAC/Idensity/2013- Chronicles";
+		String musicFolder = "D:/logs";
 		
 		Job jobProcess = null;
 		try {
