@@ -74,8 +74,9 @@ public class MusicMetadataHelper {
 			AudioFile f = null;
 			try {
 				Artwork artwork = new Artwork();
-				artwork.setPictureType(0);//PictureTypes.DEFAULT_ID);
+				artwork.setPictureType(PictureTypes.DEFAULT_ID);
 				artwork.setFromFile(frontCover);
+				
 				
 				f = AudioFileIO.read(music);
 				Tag tag = f.getTagOrCreateDefault();
@@ -89,11 +90,11 @@ public class MusicMetadataHelper {
 			} catch (Exception e) {
 				LOGGER.error("Metadata update {}", music.getAbsoluteFile());
 			} finally {
-//				try {
-//					f.commit();
-//				} catch (CannotWriteException e) {
-//					LOGGER.error("commit", e.getMessage());
-//				}
+				try {
+					f.commit();
+				} catch (CannotWriteException e) {
+					LOGGER.error("commit", e.getMessage());
+				}
 			}
 			
 		}
