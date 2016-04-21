@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.github.cunvoas.audio.metadata.MusicMetadata;
 import com.github.cunvoas.audio.metadata.MusicMetadataHelper;
 import com.github.cunvoas.audio.report.CsvMetadata;
+import com.github.cunvoas.audio.walker.MusicCoverDirectoryWalker;
 
 /**
  * Jod for metadata extraction.
@@ -22,8 +23,6 @@ public class JobAddCoverTree extends Job {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(JobAddCoverTree.class);
 
-	
-	private File coverFile;
 	
 	/**
 	 * Constructor.
@@ -47,7 +46,10 @@ public class JobAddCoverTree extends Job {
 	 */
 	@Override
 	public void process(File musicFile) throws IOException {
-		MusicMetadataHelper.addFrontCover(musicFile, coverFile);
+		File coverFile = MusicCoverDirectoryWalker.getCovers(musicFile.getParent());
+		if (coverFile!=null) {
+			MusicMetadataHelper.addFrontCover(musicFile, coverFile);
+		}
 	}
 
 	/**
@@ -56,14 +58,6 @@ public class JobAddCoverTree extends Job {
 	@Override
 	public Logger getLogger() {
 		return LOGGER;
-	}
-
-	/**
-	 * Setter for coverFile.
-	 * @param coverFile the coverFile to set
-	 */
-	public void setCoverFile(File coverFile) {
-		this.coverFile = coverFile;
 	}
 
 }

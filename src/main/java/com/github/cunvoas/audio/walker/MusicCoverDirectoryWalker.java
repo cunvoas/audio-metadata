@@ -7,7 +7,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.filefilter.FileFilterUtils;
@@ -21,19 +23,26 @@ import com.github.cunvoas.audio.job.Job;
  * Walker for music files.
  * @author CUNVOAS
  */
-public class MusicDirectoryWalker extends DirectoryWalker<File> {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MusicDirectoryWalker.class);
+public class MusicCoverDirectoryWalker extends DirectoryWalker<File> {
+	private static final Logger LOGGER = LoggerFactory.getLogger(MusicCoverDirectoryWalker.class);
 
 	private static final IOFileFilter webPageFilter = FileFilterUtils.or(
 			FileFilterUtils.suffixFileFilter(".mp3"),
 			FileFilterUtils.suffixFileFilter(".flac"),
 			FileFilterUtils.suffixFileFilter(".ogg")
 			);
+	
+	private static final IOFileFilter coverFilter = FileFilterUtils.or(
+			FileFilterUtils.suffixFileFilter(".jpg"),
+			FileFilterUtils.suffixFileFilter(".jpeg")
+			);
+	
+	private static final Map<String, File> COVERS=new HashMap<String, File>();
 
 	private boolean performActive=true;
 	private Job jobProcess;
 
-	public MusicDirectoryWalker() {
+	public MusicCoverDirectoryWalker() {
 		super(FileFilterUtils.directoryFileFilter(), webPageFilter, -1);
 	}
 	
@@ -59,12 +68,20 @@ public class MusicDirectoryWalker extends DirectoryWalker<File> {
 
 	}
 
+	private void performCover(File directory) {
+		List<File> covers = FileFilterUtils.filterList(coverFilter, directory);
+		for (File cover : covers) {
+			COVERS.put(directory.getAbsolutePath(), cover);
+		}
+	}
+	
 	/**
 	 * walk in directories.
 	 * @param directory
 	 * @return
 	 */
 	public List<File> perform(File directory) {
+		performCover(directory);
 		
 		List<File> others = new ArrayList<File>();
 		long start = System.currentTimeMillis();
@@ -90,6 +107,14 @@ public class MusicDirectoryWalker extends DirectoryWalker<File> {
 	 */
 	public void setJobProcess(Job jobProcess) {
 		this.jobProcess = jobProcess;
+	}
+
+	/**
+	 * Getter for covers.
+	 * @return the covers
+	 */
+	public static final File getCovers(String folderPath) {
+		return COVERS.get(folderPath);
 	}
 
 }
