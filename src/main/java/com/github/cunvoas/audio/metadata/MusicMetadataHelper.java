@@ -16,6 +16,8 @@ import org.jaudiotagger.tag.reference.PictureTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.cunvoas.audio.cover.CoverFile;
+
 public class MusicMetadataHelper {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(MusicMetadataHelper.class);
@@ -69,7 +71,8 @@ public class MusicMetadataHelper {
 	public static void addFrontCover(File music, File frontCover) {
 		if (music.isFile()) {
 			MusicMetadata currentMetadata = extract(music);
-				
+			
+			
 			
 			AudioFile f = null;
 			try {
@@ -97,6 +100,58 @@ public class MusicMetadataHelper {
 				}
 			}
 			
+		}
+	}
+	
+
+	/**
+	 * Aff front cover ton music file.
+	 * @param music
+	 * @param frontCover
+	 */
+	public static void addFrontCover(File music, CoverFile coverFile) {
+		if (music.isFile()) {
+			boolean applyCover=false;
+			MusicMetadata currentMetadata = extract(music);
+			
+			if (currentMetadata.isImage()) {
+				if (currentMetadata.getImgHeight()>coverFile.getHeight() && currentMetadata.getImgWidth()>coverFile.getWidth()) {
+					applyCover=true;
+					LOGGER.info("replace cover {}",  music.getPath());
+				} else {
+					LOGGER.info("skip cover {}",  music.getPath());
+				}
+			} else {
+				applyCover=true;
+				LOGGER.info("add cover {}",  music.getPath());
+			}
+			
+			if (applyCover) {
+				AudioFile f = null;
+				try {
+					Artwork artwork = new Artwork();
+					artwork.setPictureType(PictureTypes.DEFAULT_ID);
+					artwork.setFromFile(coverFile.getCoverFile());
+					
+					f = AudioFileIO.read(music);
+					Tag tag = f.getTagOrCreateDefault();
+					
+				//	tag.getArtworkList();
+					if (currentMetadata.isImage() ) {
+						tag.deleteArtworkField();
+					}
+					tag.addField(artwork);
+					
+				} catch (Exception e) {
+					LOGGER.error("Metadata update {}", music.getAbsoluteFile());
+				} finally {
+					try {
+						f.commit();
+					} catch (CannotWriteException e) {
+						LOGGER.error("commit", e.getMessage());
+					}
+				}
+			}
 		}
 	}
 	
