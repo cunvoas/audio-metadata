@@ -12,8 +12,8 @@ import com.github.cunvoas.audio.walker.MusicDirectoryWalker;
 public class MainAddFrontCover {
 
 	public static void main(String[] args) {
-		String coverFile = "D:/Music/MP3/L'Esprit Du Clan/2016 - Chapitre VI/l-esprit-du-clan-chapitre-vi.jpg";
-		String musicFolder = "D:/Music/MP3/L'Esprit Du Clan/2016 - Chapitre VI";
+		String coverFile = "D:/Music/MP3/Post Mortem/2016 - God with Horns/a1270337668_10.jpg";
+		String musicFolder = "D:/Music/MP3/Post Mortem/2016 - God with Horns";
 		
 		Job jobProcess = null;
 		try {
