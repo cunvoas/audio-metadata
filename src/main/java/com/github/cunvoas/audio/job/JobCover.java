@@ -19,6 +19,7 @@ import com.github.cunvoas.audio.cover.CoverMap;
  * @author CUNVOAS
  */
 public class JobCover extends Job {
+	private static final int MAX_PIX_COVER = 1401;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(JobCover.class);
 	
@@ -47,7 +48,6 @@ public class JobCover extends Job {
 	 */
 	@Override
 	public void process(File cover) throws IOException {
-		int maxSize=1001;
 		String folderString = cover.getParent();
 		
 		if (!CoverMap.getCovers().containsKey(folderString)) {
@@ -69,7 +69,7 @@ public class JobCover extends Job {
 			int width          = bimg.getWidth();
 			int height         = bimg.getHeight();
 			
-			if (width<maxSize && height<maxSize) {
+			if (width<MAX_PIX_COVER && height<MAX_PIX_COVER) {
 				
 				if (width>cWidth && height>cHeight) {
 					
