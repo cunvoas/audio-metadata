@@ -73,7 +73,7 @@ public class CsvMetadata implements Closeable {
 		if (metadata != null) {
 			csvCols.addAll(metadata.toCsv());
 		} else {
-			csvCols.addAll(this.emptyMetaData(MusicMetadata.NB_TAGS));
+			csvCols.addAll(this.emptyMetaData(musicFile, MusicMetadata.NB_TAGS));
 		}
 		this.formatLine(csvPrinter, csvCols);
 		csvCols.clear();
@@ -174,9 +174,10 @@ public class CsvMetadata implements Closeable {
 		csvPrinter.println();
 	}
 
-	private List<String> emptyMetaData(int qte) {
+	private List<String> emptyMetaData(File file, int qte) {
 		List<String> emptyList = new ArrayList<String>();
-		for (int i = 0; i < qte; i++) {
+		emptyList.add(file.getAbsolutePath());
+		for (int i = 1; i < qte; i++) {
 			emptyList.add("");
 		}
 		return emptyList;

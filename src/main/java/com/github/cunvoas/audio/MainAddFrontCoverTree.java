@@ -12,7 +12,7 @@ import com.github.cunvoas.audio.walker.MusicDirectoryWalker;
 public class MainAddFrontCoverTree {
 
 	public static void main(String[] args) {
-		String musicFolder = "D:/Music/MP3";
+		String musicFolder = "F:/Discographies/Mass Hysteria/2012 - L'Armée des ombres/";
 		
 		Job jobProcess = null;
 		JobCover jobCover=null;

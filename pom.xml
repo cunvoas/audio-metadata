@@ -43,6 +43,22 @@
 			<version>4.2</version>
 		</dependency>
 
+
+		<!-- https://mvnrepository.com/artifact/org.grails.plugins/ntlm-auth <dependency> 
+			<groupId>org.grails.plugins</groupId> <artifactId>ntlm-auth</artifactId> 
+			<version>0.6</version> </dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
+		<dependency>
+			<groupId>com.google.api-client</groupId>
+			<artifactId>google-api-client</artifactId>
+			<version>1.22.0</version>
+		</dependency>
+
+		<!-- <project> <dependencies> <dependency> <groupId>com.google.apis</groupId> 
+			<artifactId>google-api-services-customsearch</artifactId> <version>v1-rev51-1.22.0</version> 
+			</dependency> </dependencies> </project> -->
+
 		<!-- Utils -->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -99,6 +115,14 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.jbehave/jbehave-core -->
+		<dependency>
+			<groupId>org.jbehave</groupId>
+			<artifactId>jbehave-core</artifactId>
+			<version>4.0.5</version>
+		</dependency>
+
+
 
 	</dependencies>
 
@@ -123,21 +147,10 @@
 				<version>2.5.1</version>
 			</plugin>
 
-<!-- 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>license-maven-plugin</artifactId>
-				<version>1.0-SNAPSHOT</version>
-				<executions>
-					<execution>
-						<id>download-licenses</id>
-						<goals>
-							<goal>download-licenses</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
--->
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>license-maven-plugin</artifactId> 
+				<version>1.0-SNAPSHOT</version> <executions> <execution> <id>download-licenses</id> 
+				<goals> <goal>download-licenses</goal> </goals> </execution> </executions> 
+				</plugin> -->
 		</plugins>
 	</build>
 </project>

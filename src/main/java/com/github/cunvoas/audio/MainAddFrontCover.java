@@ -12,8 +12,8 @@ import com.github.cunvoas.audio.walker.MusicDirectoryWalker;
 public class MainAddFrontCover {
 
 	public static void main(String[] args) {
-		String coverFile = "D:/Music/MP3/Post Mortem/2016 - God with Horns/a1270337668_10.jpg";
-		String musicFolder = "D:/Music/MP3/Post Mortem/2016 - God with Horns";
+		String coverFile = "D:/Music/_GSM/Music_Card/WMA/Dagoba/2015-Tales of the Black Dawn/Dagoba-Tales-of-the-Black-Dawn.png";
+		String musicFolder = "D:/Music/_GSM/Music_Card/WMA/Dagoba/2015-Tales of the Black Dawn";
 		
 		Job jobProcess = null;
 		try {
