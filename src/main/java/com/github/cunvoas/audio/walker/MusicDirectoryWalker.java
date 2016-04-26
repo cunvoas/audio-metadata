@@ -10,8 +10,10 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.DirectoryWalker;
+import org.apache.commons.io.IOCase;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.IOFileFilter;
+import org.jaudiotagger.audio.SupportedFileFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,10 +27,18 @@ public class MusicDirectoryWalker extends DirectoryWalker<File> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MusicDirectoryWalker.class);
 
 	private static final IOFileFilter webPageFilter = FileFilterUtils.or(
-			FileFilterUtils.suffixFileFilter(".mp3"),
-			FileFilterUtils.suffixFileFilter(".flac"),
-			FileFilterUtils.suffixFileFilter(".ogg")
-			);
+			FileFilterUtils.suffixFileFilter(SupportedFileFormat.MP3.getFilesuffix(), IOCase.INSENSITIVE)
+			, FileFilterUtils.suffixFileFilter(SupportedFileFormat.FLAC.getFilesuffix(), IOCase.INSENSITIVE)
+			, FileFilterUtils.suffixFileFilter(SupportedFileFormat.OGG.getFilesuffix(), IOCase.INSENSITIVE)
+			, FileFilterUtils.suffixFileFilter(SupportedFileFormat.MP4.getFilesuffix(), IOCase.INSENSITIVE)
+			, FileFilterUtils.suffixFileFilter(SupportedFileFormat.M4A.getFilesuffix(), IOCase.INSENSITIVE)
+			, FileFilterUtils.suffixFileFilter(SupportedFileFormat.M4B.getFilesuffix(), IOCase.INSENSITIVE)
+			, FileFilterUtils.suffixFileFilter(SupportedFileFormat.M4P.getFilesuffix(), IOCase.INSENSITIVE)
+			, FileFilterUtils.suffixFileFilter(SupportedFileFormat.WMA.getFilesuffix(), IOCase.INSENSITIVE)
+//			, FileFilterUtils.suffixFileFilter(SupportedFileFormat.WAV.getFilesuffix(), IOCase.INSENSITIVE)
+//			, FileFilterUtils.suffixFileFilter(SupportedFileFormat.RA.getFilesuffix(), IOCase.INSENSITIVE)
+//			, FileFilterUtils.suffixFileFilter(SupportedFileFormat.RM.getFilesuffix(), IOCase.INSENSITIVE)
+		);
 
 	private boolean performActive=true;
 	private Job jobProcess;
