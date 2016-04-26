@@ -114,7 +114,7 @@ public class MusicMetadataHelper {
 			boolean applyCover=false;
 			MusicMetadata currentMetadata = extract(music);
 			
-			if (currentMetadata.isImage()) {
+			if (currentMetadata!=null && currentMetadata.isImage()) {
 				if (currentMetadata.getImgHeight()>coverFile.getHeight() && currentMetadata.getImgWidth()>coverFile.getWidth()) {
 					applyCover=true;
 					LOGGER.info("replace cover {}",  music.getPath());
